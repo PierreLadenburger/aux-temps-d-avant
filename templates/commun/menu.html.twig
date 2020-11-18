@@ -1,34 +1,42 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('accueil') }}" style="color: #d7c9b8; font-size: 20px;"><i class="fa fa-home"></i> Aux Temps d'Avant</a>
+    <ul class="nav navbar-nav">
+        <li><a class="nav-link" href="{{ path('accueil') }}" ><i class="fa fa-home"></i> Aux Temps d'Avant</a></li>
+    </ul>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-link dropdown" style="cursor: pointer;">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #d7c9b8; background-color: #353942;"><i class="fas fa-bed"></i> Les chambres<span style="color: #d7c9b8;" class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bed"></i> Les chambres<span style="color: #d7c9b8;" class="caret"></span></a>
                 <ul class="dropdown-menu" style="background-color: #353942; border-color: #353942; font-size: 20px;">
-                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'forge' }) }}" style="color: #d7c9b8;"> La Forge</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> La Grange</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> L'Alcôve</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'forge' }) }}" style="color: #999c9f;"> La Forge</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> La Grange</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> L'Alcôve</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link js-scroll-trigger" href="" style="color: #d7c9b8;"><i class="fas fa-book"></i> Livre d'or</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="" style="color: #d7c9b8;"><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="{{ path('accueil') }}"><i class="fas fa-book"></i> Livre d'or</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>
             <li class="nav-link dropdown" style="cursor: pointer;">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #d7c9b8; background-color: #353942;"><i class="fas fa-map-marker-alt"></i> Tourismes<span style="color: #d7c9b8;" class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-map-marker-alt"></i> Tourismes<span style="color: #d7c9b8;" class="caret"></span></a>
                 <ul class="dropdown-menu" style="background-color: #353942; border-color: #353942; font-size: 20px;">
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> Balades</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> Cités</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> Musées</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> Mémoires</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> Terroirs</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #d7c9b8;"> Divers</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Balades</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Cités</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Musées</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Mémoires</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Terroirs</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Divers</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link js-scroll-trigger" href="" style="color: #d7c9b8;"><i class="fas fa-star"></i> Ailleurs</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="" style="color: #d7c9b8;"><i class="fas fa-phone"></i> Contact</a></li>
-            <li><a class="nav-link" href=""><i class="fas fa-lock"></i></a> </li>
+            <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-star"></i> Ailleurs</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-phone"></i> Contact</a></li>
+            {% if app.user %}
+                <li><a class="nav-link" href="{{ path('administration') }}"><i class="fas fa-user-cog"></i></a> </li>
+                <li><a class="nav-link" href="{{ path('deconnexion') }}"><i class="fas fa-sign-out-alt"></i></a> </li>
+            {% else %}
+                <li><a class="nav-link" href="{{ path('connexion') }}"><i class="fas fa-lock"></i></a> </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

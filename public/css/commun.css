@@ -8,6 +8,27 @@ p {
     color : rgb(53, 57, 66);
 }
 
+.btn {
+    background-color : #d3d0cd !important;
+    border: 2px solid #343a40 !important;
+    color: #353942 !important;
+}
+
+.btn:hover {
+    background-color : #343a40 !important;
+    color: #d7c9b8 !important;
+}
+
+form {
+    margin: 0 auto;
+    width: 450px;
+    height: 50%;
+}
+
+.titre-partie {
+    color : rgb(53, 57, 66) !important;
+}
+
 th {
     border: 1px solid rgb(53, 57, 66);
     padding: 5px;
