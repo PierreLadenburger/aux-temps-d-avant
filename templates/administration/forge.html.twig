@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    {% include 'commun/menu.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2">
+                {% include 'commun/menu-admin.html.twig' %}
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-10 col-xl-10">
+                <h2 class="titre">La Forge</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <h5 class="font-weight-bold titre-partie">Liste</h5>
+                        <table class="mb-1 w-100">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>2</th>
+                                <th>90 €</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <div id="datePickerForge"></div>
+                        </div>
+                        <div>
+                            <form method="post">
+                                <fieldset class="form-group">
+                                    <label style="color: #343a40;" for="date_debut">Date début</label>
+                                    <input id="date_debut" name="date_debut" type="date" class="form-control">
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <label style="color: #343a40;" for="date_fin">Date fin</label>
+                                    <input id="date_fin" name="date_fin" type="date" class="form-control">
+                                </fieldset>
+                                <button class="btn btn-lg btn-block">
+                                    <i class="fas fa-plus-circle"></i> Ajouter
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $("#datePickerForge").datepicker({
+                    prevText: 'Préc',
+                    nextText: 'Suiv',
+                    currentText: 'Aujourd\'hui',
+                    dateFormat: "yy-mm-dd",
+                    monthNames: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin',
+                        'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun',
+                        'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                    dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                    firstDay: 1,
+                    beforeShowDay: function (date) {
+                        /* var datestring = formatDateYYYYMMDD(date);
+                          for (var i = 0; i < reservations.length; i++) {
+                              if (reservations[i].date === datestring) {
+                                  return [true, 'highlight'];
+                              }
+                          }*/
+                          return [true, 'available'];
+                    },
+                    onSelect: function (dateText, inst) {
+                        console.log(inst);
+                        console.log(dateText);
+                        /*inst.dpDiv.find('.ui-datepicker-current-day a')
+                            .css('background', '#000000');
+                        $('#datePickerForge').datepicker("refresh");*/
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

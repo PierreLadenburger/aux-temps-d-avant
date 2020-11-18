@@ -10,7 +10,8 @@ p {
 
 .btn {
     background-color : #d3d0cd !important;
-    border: 2px solid #343a40 !important;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+
     color: #353942 !important;
 }
 
@@ -23,6 +24,15 @@ form {
     margin: 0 auto;
     width: 450px;
     height: 50%;
+}
+
+.ui-datepicker .highlight a {
+    background: #CF0A1D;
+    color: white;
+}
+
+.ui-datepicker .available a {
+    color: rgb(53, 57, 66);
 }
 
 .titre-partie {
