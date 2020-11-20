@@ -26,12 +26,12 @@ form {
     height: 50%;
 }
 
-.ui-datepicker .highlight a {
+.ui-datepicker .reserve a {
     background: #CF0A1D;
     color: white;
 }
 
-.ui-datepicker .available a {
+.ui-datepicker .disponible a {
     color: rgb(53, 57, 66);
 }
 

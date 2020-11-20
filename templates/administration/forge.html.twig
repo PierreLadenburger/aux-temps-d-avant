@@ -49,6 +49,9 @@
                                 </button>
                             </form>
                         </div>
+                        {% for reservation in reservations %}
+                            {{ reservation.date | date('y-m-d') }}
+                        {% endfor %}
 
                     </div>
                 </div>
@@ -59,8 +62,23 @@
 {% endblock %}
 {% block javascripts %}
     <script>
+        var reservations = {{ reservations | json_encode | raw }}
+        console.log(reservations);
+
+        function formatDateYYYYMMDD(date) {
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth()+1).toString();
+            var dd  = date.getDate().toString();
+            // CONVERT mm AND dd INTO chars
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+            // CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+            return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+        }
+
         $(document).ready(function () {
             $(function () {
+
                 $("#datePickerForge").datepicker({
                     prevText: 'Préc',
                     nextText: 'Suiv',
@@ -75,13 +93,18 @@
                     dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
                     firstDay: 1,
                     beforeShowDay: function (date) {
-                        /* var datestring = formatDateYYYYMMDD(date);
-                          for (var i = 0; i < reservations.length; i++) {
-                              if (reservations[i].date === datestring) {
-                                  return [true, 'highlight'];
+                        //console.log(date);
+                        let dateFormater = formatDateYYYYMMDD(date);
+
+                          for (let i = 0; i < reservations.length; i++) {
+                              //console.log(reservations[i].date.date.substring(0, 10));
+                              //console.log(dateFormater);
+
+                              if (reservations[i].date.date.substring(0, 10) === dateFormater) {
+                                  return [true, 'reserve'];
                               }
-                          }*/
-                          return [true, 'available'];
+                          }
+                          return [true, 'disponible'];
                     },
                     onSelect: function (dateText, inst) {
                         console.log(inst);
