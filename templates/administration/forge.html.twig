@@ -62,8 +62,13 @@
 {% endblock %}
 {% block javascripts %}
     <script>
-        var reservations = {{ reservations | json_encode | raw }}
-        console.log(reservations);
+        let reservationsObjet = {{ reservations | json_encode() | raw }};
+        let reservations = [];
+        for (let i = 0; i < reservationsObjet.length; i++) {
+            reservations.push(reservationsObjet[i].date.date.substring(0, 10));
+        }
+
+       // console.log(reservations);
 
         function formatDateYYYYMMDD(date) {
             var yyyy = date.getFullYear().toString();
@@ -92,26 +97,39 @@
                     dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
                     dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
                     firstDay: 1,
-                    beforeShowDay: function (date) {
-                        //console.log(date);
-                        let dateFormater = formatDateYYYYMMDD(date);
-
+                    beforeShowDay: function (dateObjet) {
+                        console.log("beforeShowDay " + reservations);
+                        let date = formatDateYYYYMMDD(dateObjet);
                           for (let i = 0; i < reservations.length; i++) {
-                              //console.log(reservations[i].date.date.substring(0, 10));
-                              //console.log(dateFormater);
-
-                              if (reservations[i].date.date.substring(0, 10) === dateFormater) {
+                              if (reservations[i] === date) {
                                   return [true, 'reserve'];
                               }
                           }
                           return [true, 'disponible'];
                     },
-                    onSelect: function (dateText, inst) {
-                        console.log(inst);
-                        console.log(dateText);
-                        /*inst.dpDiv.find('.ui-datepicker-current-day a')
-                            .css('background', '#000000');
-                        $('#datePickerForge').datepicker("refresh");*/
+                    onSelect: function (date, inst) {
+                        //console.log(inst);
+                        //console.log(date);
+                        let index = reservations.indexOf(date);
+                        //console.log("recherche" + index);
+                        if (index === -1) {
+                            reservations.push(date);
+                        } else {
+                            reservations = reservations.filter(v => v !== date);
+                        }
+
+                        $.ajax({
+                            method: 'POST',
+                            url: '/administration/mise-a-jour/reservation',
+                            dataType: 'json',
+                            data: {chambre: 'forge', date: date},
+                            success: function () {
+
+                            }
+                        });
+                        console.log("onselect " + reservations);
+
+                        //$('#datePickerForge').datepicker("refresh");
                     }
                 });
             });

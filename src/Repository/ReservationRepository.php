@@ -22,6 +22,7 @@ class ReservationRepository extends ServiceEntityRepository
 
     public function recupererReservations() {
       return $this->createQueryBuilder('r')
+        ->select('r.date')
         ->getQuery()
         ->getResult(Query::HYDRATE_ARRAY);
     }
