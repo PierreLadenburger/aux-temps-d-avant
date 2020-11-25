@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ chambre.nom }}{% endblock %}
+
+{% block body %}
+    {% include 'commun/menu.html.twig' %}
+    <div class="container police">
+        <h2 class="titre">{{ chambre.nom }}</h2>
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <p>
+                    {{ chambre.description }}
+                </p>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-6">
+                        <h5 class="font-weight-bold titre-partie">Equipements</h5>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fas fa-user"></i></span> Sèche cheveux</li>
+                            <li><span class="fa-li"><i class="fas fa-shower"></i></span> Douche à l'italienne</li>
+                            <li><span class="fa-li"><i class="fas fa-toilet"></i></span> WC privé</li>
+                            <li><span class="fa-li"><i class="fas fa-wifi"></i></span> Wifi</li>
+                            <li><span class="fa-li"><i class="fas fa-tv"></i></span> Télévison</li>
+                            <li><span class="fa-li"><i class="fas fa-bed"></i></span> Lit double 2 x 90 x 200 cm</li>
+                            <li><span class="fa-li"><i class="fas fa-bed"></i></span> Lit simple 80 x 200 cm</li>
+                            <li><span class="fa-li"><i class="fas fa-thermometer-empty"></i></span> Mini réfrigérateur</li>
+                        </ul>
+                        <h5 class="font-weight-bold titre-partie">Sur demande</h5>
+                        <ul class="fa-ul">
+                            <li><span class="fa-li"><i class="fas fa-bed"></i></span> Lit bébé</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-sm-6">
+                        <h5 class="font-weight-bold titre-partie">Disponibilités</h5>
+                        <div id="datePickerGrange"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <h5 class="font-weight-bold titre-partie">Tarifs</h5>
+                        <table class="mb-2">
+                            <thead>
+                            <tr>
+                                <th>Nombres de nuits</th>
+                                <th>1 nuit</th>
+                                <th>2 nuits</th>
+                                <th>4 nuits</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>2 personnes</th>
+                                <th>90 €</th>
+                                <th>85 €</th>
+                                <th>80 €</th>
+                            </tr>
+                            <tr>
+                                <th>3 personnes</th>
+                                <th>120 €</th>
+                                <th>115 €</th>
+                                <th>110 €</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p class="mb-0">Les prix indiqués sont par nuitée</p>
+                        <p class="mb-0"> Petit-déjeuner compris</p>
+                        <p><strong>Taxe de séjour :</strong> 0.80 euro / jour / adulte</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="slides-container">
+                    {% for photo in photos %}
+                        <div class="slides-grange"
+                             style="width: 100%; height: 100%; background-size: cover; background-image: url({{ photo.url }})">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let reservationsObjet = {{ reservations | json_encode() | raw }};
+        let reservations = [];
+        for (let i = 0; i < reservationsObjet.length; i++) {
+            reservations.push(reservationsObjet[i].date.date.substring(0, 10));
+        }
+
+        function formatDateYYYYMMDD(date) {
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth()+1).toString();
+            var dd  = date.getDate().toString();
+            // CONVERT mm AND dd INTO chars
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+            // CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+            return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+        }
+
+        $(document).ready(function () {
+            $(function () {
+                $("#datePickerGrange").datepicker({
+                    prevText: 'Préc',
+                    nextText: 'Suiv',
+                    currentText: 'Aujourd\'hui',
+                    dateFormat: "yy-mm-dd",
+                    monthNames: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin',
+                        'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun',
+                        'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                    dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                    firstDay: 1,
+                    beforeShowDay: function (dateObjet) {
+                        let date = formatDateYYYYMMDD(dateObjet);
+                        for (let i = 0; i < reservations.length; i++) {
+                            if (reservations[i] === date) {
+                                return [true, 'reserve'];
+                            }
+                        }
+                        return [true, 'disponible'];
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

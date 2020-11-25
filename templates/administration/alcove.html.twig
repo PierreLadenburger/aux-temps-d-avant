@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div>
-                            <div id="datePickerForge"></div>
+                            <div id="datePickerAlcove"></div>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
 
         $(document).ready(function () {
             $(function () {
-                $("#datePickerForge").datepicker({
+                $("#datePickerAlcove").datepicker({
                     prevText: 'Préc',
                     nextText: 'Suiv',
                     currentText: 'Aujourd\'hui',
@@ -78,7 +78,7 @@
                             type: "POST",
                             url: "{{ path('administration_reservation') }}",
                             dataType: "json",
-                            data: { chambre: 'forge', date: date},
+                            data: { chambre: 'alcove', date: date},
                             async: true,
                             success: function () {
 

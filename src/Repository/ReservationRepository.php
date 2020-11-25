@@ -20,9 +20,11 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    public function recupererReservations() {
+    public function recupererReservations($chambre) {
       return $this->createQueryBuilder('r')
         ->select('r.date')
+        ->where('r.chambre = :chambre')
+	    ->setParameter('chambre', $chambre)
         ->getQuery()
         ->getResult(Query::HYDRATE_ARRAY);
     }

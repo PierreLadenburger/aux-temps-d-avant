@@ -1,0 +1,20 @@
+.slides-container {
+    display: block;
+    border-radius: 5px;
+    margin: auto;
+}
+
+.slides-forge {
+    display: none;
+    border-radius: 5px;
+}
+
+.slides-grange {
+    display: none;
+    border-radius: 5px;
+}
+
+.slides-alcove {
+    display: none;
+    border-radius: 5px;
+}

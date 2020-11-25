@@ -12,11 +12,11 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bed"></i> Les chambres<span style="color: #d7c9b8;" class="caret"></span></a>
                 <ul class="dropdown-menu" style="background-color: #353942; border-color: #353942; font-size: 20px;">
                     <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'forge' }) }}" style="color: #999c9f;"> La Forge</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> La Grange</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> L'Alcôve</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'grange' }) }}" style="color: #999c9f;"> La Grange</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'alcove' }) }}" style="color: #999c9f;"> L'Alcôve</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link js-scroll-trigger" href="{{ path('accueil') }}"><i class="fas fa-book"></i> Livre d'or</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="{{ path('livre-d-or') }}"><i class="fas fa-book"></i> Livre d'or</a></li>
             <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>
             <li class="nav-link dropdown" style="cursor: pointer;">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-map-marker-alt"></i> Tourismes<span style="color: #d7c9b8;" class="caret"></span></a>

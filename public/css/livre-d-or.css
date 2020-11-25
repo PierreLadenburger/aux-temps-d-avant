@@ -1,0 +1,32 @@
+.commentaire {
+    display: none;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: black;
+}
+
+.commentaire-precedent,
+.commentaire-suivant {
+    cursor: pointer;
+    width: auto;
+    padding: 16px;
+    color: black;
+    top: 55%;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.commentaire-suivant {
+    float: right;
+}
+
+.commentaire-precedent {
+    float: left;
+}
+
+.commentaire-precedent:hover,
+.commentaire-suivant:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}

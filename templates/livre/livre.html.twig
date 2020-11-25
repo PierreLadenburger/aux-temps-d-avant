@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livre d'or{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/livre-d-or.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'commun/menu.html.twig' %}
+    <div class="container police">
+        <h2 class="titre">Livre d'or</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <img src="/images/livre-d-or.jpg" width="350">
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                {% for livre in livres %}
+                    <div class="commentaire">
+                        <div>{{ livre.commentaire }}</div>
+                        <br>
+                        <div>{{ livre.nom }}</div>
+                        <div>{{ livre.date | date('d-m-Y') }}</div>
+                        <a onclick="plusSlidesBook(-1)" class="commentaire-precedent">&#10094;</a>
+                        <a onclick="plusSlidesBook(1)" class="commentaire-suivant">&#10095;</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/livre-d-or.js"></script>
+{% endblock %}
