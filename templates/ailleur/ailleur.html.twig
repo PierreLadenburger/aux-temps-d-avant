@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ailleurs{% endblock %}
+
+{% block body %}
+    {% include 'commun/menu.html.twig' %}
+    <div class="container police">
+        <h2 class="titre">Ailleurs</h2>
+        <div class="row">
+            <div class="col-lg-5 col-md-12 col-sm-12">
+                {% for ailleur in ailleurs %}
+                    {% include 'commun/commerce.html.twig' with  {'commerce' : ailleur} %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="carte-container">
+                    <div class="carte" id="carte">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% include 'commun/carte.html.twig' with { 'ailleurs' : ailleurs } %}
+{% endblock %}

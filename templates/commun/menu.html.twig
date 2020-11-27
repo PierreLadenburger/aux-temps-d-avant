@@ -17,19 +17,20 @@
                 </ul>
             </li>
             <li><a class="nav-link js-scroll-trigger" href="{{ path('livre-d-or') }}"><i class="fas fa-book"></i> Livre d'or</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="{{ path('restaurant') }}" ><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>
             <li class="nav-link dropdown" style="cursor: pointer;">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-map-marker-alt"></i> Tourismes<span style="color: #d7c9b8;" class="caret"></span></a>
                 <ul class="dropdown-menu" style="background-color: #353942; border-color: #353942; font-size: 20px;">
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Balades</a></li>
+                    {{ render(controller('App\\Controller\\AccueilController::afficherCategories')) }}
+                    <!-- <li><a class="dropdown-item js-scroll-trigger" href="{{ path('tourisme', { categorie : 'balade' }) }}" style="color: #999c9f;"> Balades</a></li>
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Cités</a></li>
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Musées</a></li>
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Mémoires</a></li>
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Terroirs</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Divers</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Divers</a></li> -->
                 </ul>
             </li>
-            <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-star"></i> Ailleurs</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="{{ path('ailleur') }}" ><i class="fas fa-star"></i> Ailleurs</a></li>
             <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-phone"></i> Contact</a></li>
             {% if app.user %}
                 <li><a class="nav-link" href="{{ path('administration') }}"><i class="fas fa-user-cog"></i></a> </li>

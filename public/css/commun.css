@@ -15,6 +15,18 @@ p {
     color: #353942 !important;
 }
 
+.marqueur-carte {
+    background-color: darkred !important;
+    border-color: darkred; !important;
+    box-shadow: none !important;
+}
+
+.marqueur-carte:hover {
+    background-color: darkred !important;
+    border-color: darkred; !important;
+    box-shadow: none !important;
+}
+
 .btn:hover {
     background-color : #343a40 !important;
     color: #d7c9b8 !important;

@@ -1,0 +1,9 @@
+<div class="mb-4">
+    <h5 class="mb-0 font-weight-bold titre-partie">{{ commerce.nom }}</h5>
+    <p class="mb-0">{{ commerce.adresse }}</p>
+    <a style="color: darkred;" href="{{ commerce.site }}">{{ commerce.site }}</a>
+    <br>
+    <button class="btn marqueur-carte" value="{{ commerce.lat ~ "|" ~ commerce.lng ~ "|" ~ commerce.nom }}">
+        <i class="fas fa-map-marker-alt text-white"></i>
+    </button>
+</div>

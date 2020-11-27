@@ -1,0 +1,19 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZwFBQDXkJtIr5ZGpmXKQpHcbd025gyWU&"></script>
+<script>
+    var pos = {
+        lat: 48.903975,
+        lng: 7.661313
+    };
+    var flightPath;
+    var map = new google.maps.Map(document.getElementById('carte'), {
+        zoom: 10,
+        center: pos
+    });
+    var marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        name: "Aux temps d'avant",
+        title: "Aux temps d'avant",
+        icon: "/images/marqueurA.png"
+    });
+</script>

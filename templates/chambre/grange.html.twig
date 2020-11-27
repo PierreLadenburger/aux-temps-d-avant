@@ -11,6 +11,16 @@
                 <p>
                     {{ chambre.description }}
                 </p>
+
+                <div class="slides-container">
+                    {% for photo in photos %}
+                        <div class="slides-grange"
+                             style="width: 100%; height: 100%; background-size: cover; background-image: url({{ photo.url }})">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="row">
                     <div class="col-md-6 col-lg-6 col-sm-6">
                         <h5 class="font-weight-bold titre-partie">Equipements</h5>
@@ -31,7 +41,7 @@
                     </div>
                     <div class="col-md-6 col-lg-6 col-sm-6">
                         <h5 class="font-weight-bold titre-partie">Disponibilités</h5>
-                        <div id="datePickerGrange"></div>
+                        <div id="datePickerGrange" style="font-size: 15px;"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -66,15 +76,6 @@
                         <p><strong>Taxe de séjour :</strong> 0.80 euro / jour / adulte</p>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="slides-container">
-                    {% for photo in photos %}
-                        <div class="slides-grange"
-                             style="width: 100%; height: 100%; background-size: cover; background-image: url({{ photo.url }})">
-                        </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>

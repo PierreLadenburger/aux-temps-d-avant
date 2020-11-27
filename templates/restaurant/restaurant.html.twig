@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurants{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/carte.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'commun/menu.html.twig' %}
+    <div class="container police">
+        <h2 class="titre">Restaurants</h2>
+        <div class="row">
+            <div class="col-lg-5 col-md-12 col-sm-12">
+                {% for restaurant in restaurants %}
+                    {% include 'commun/commerce.html.twig' with  {'commerce' : restaurant} %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="carte-container">
+                    <div class="carte" id="carte">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% include 'commun/carte.html.twig' %}
+{% endblock %}
+
+
+
+

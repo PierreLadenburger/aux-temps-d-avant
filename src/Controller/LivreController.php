@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LivreController extends AbstractController
 {
 	/**
-	 * @Route("/livre", name="livre-d-or")
+	 * @Route("/livre-d-or", name="livre-d-or")
 	 * @param LivreRepository $livreRepository
 	 * @return Response
 	 */
