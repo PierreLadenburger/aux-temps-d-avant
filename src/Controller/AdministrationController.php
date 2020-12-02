@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Commun\GoogleMaps;
 use App\Entity\Reservation;
+use App\Entity\Restaurant;
+use App\Form\RestaurantFormType;
 use App\Repository\ChambreRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\RestaurantRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +19,17 @@ use Symfony\Component\Validator\Constraints\Date;
 
 class AdministrationController extends AbstractController
 {
-    /**
+	private $googleMaps;
+	private $entityManager;
+
+	function __construct(EntityManagerInterface $entityManager)
+	{
+		$this->googleMaps = new GoogleMaps();
+		$this->entityManager =  $entityManager;
+
+	}
+
+	/**
      * @Route("/administration", name="administration")
      */
     public function index(): Response
@@ -29,7 +44,7 @@ class AdministrationController extends AbstractController
      */
     public function administration_reservation(Request  $request, ReservationRepository  $reservationRepository,
                                                ChambreRepository $chambreRepository) {
-        $em = $this->getDoctrine()->getManager();
+        //$em = $this->getDoctrine()->getManager();
         if ($request->isXmlHttpRequest()) {
             $chambre = $chambreRepository->findOneBy(['diminutif' => $request->request->get('chambre')]);
             $reservation = $reservationRepository->findOneBy(['chambre' => $chambre, 'date' => new \DateTime($request->request->get('date'))]);
@@ -37,14 +52,55 @@ class AdministrationController extends AbstractController
             	$nouvelleReservation = new Reservation();
             	$nouvelleReservation->setChambre($chambre);
             	$nouvelleReservation->setDate(new \DateTime($request->request->get('date')));
-            	$em->persist($nouvelleReservation);
+            	$this->entityManager->persist($nouvelleReservation);
             } else {
-            	$em->remove($reservation);
+            	$this->entityManager->remove($reservation);
             }
         }
-	    $em->flush();
+	    $this->entityManager->flush();
 	    return new JsonResponse(['statut' => 'ok']);
     }
+
+	/**
+	 * @Route("/administration/restaurant", name="administration_restaurant")
+	 * @param Request $request
+	 * @param RestaurantRepository $restaurantRepository
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 */
+	public function administration_restaurant(Request $request,
+	                                          RestaurantRepository  $restaurantRepository) {
+		//$em = $this->getDoctrine()->getManager();
+		$restaurant = new Restaurant();
+		$restaurants = $restaurantRepository->findAll();
+		$formulaire = $this->createForm(RestaurantFormType::class, $restaurant);
+		$formulaire->handleRequest($request);
+		if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+			$restaurant = $formulaire->getData();
+			$adresse = $this->googleMaps->recupererGoogleMapsAdresse($restaurant->getAdresse());
+			$restaurant->setAdresse($adresse['results'][0]['formatted_address']);
+			$restaurant->setLat($adresse['results'][0]['geometry']['location']['lat']);
+			$restaurant->setLng($adresse['results'][0]['geometry']['location']['lng']);
+			$this->entityManager->persist($restaurant);
+			$this->entityManager->flush();
+			return $this->redirectToRoute('administration_restaurant');
+		}
+
+		return $this->render('administration/restaurant.html.twig', [
+			'formulaire' => $formulaire->createView(),
+			'restaurants' => $restaurants
+		]);
+	}
+
+	/**
+	 * @Route("/administration/suppression/{id}", name="administration_restaurant_suppression")
+	 */
+	public function administration_restaurant_suppression($id, RestaurantRepository $restaurantRepository) {
+		//$em = $this->getDoctrine()->getManager();
+		$restaurant = $restaurantRepository->findOneBy(['id' => $id]);
+		$this->entityManager->remove($restaurant);
+		$this->entityManager->flush();
+		return $this->redirectToRoute('administration_restaurant');
+	}
 
     /**
      * @Route("/administration/{diminutif}", name="administration_chambre")
