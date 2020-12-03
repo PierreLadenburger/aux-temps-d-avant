@@ -1,7 +1,7 @@
 let indexLivre = 1;
 slidesBook(indexLivre);
 
-function plusSlidesBook(n) {
+function plusSlidesLivre(n) {
     slidesBook(indexLivre += n);
 }
 

@@ -3,19 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Enum\TourismeEnum;
+use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController
 {
-    /**
-     * @Route("/", name="accueil")
-     */
-    public function index(): Response
+	/**
+	 * @Route("/", name="accueil")
+	 * @param PhotoRepository $photoRepository
+	 * @return Response
+	 */
+    public function index(PhotoRepository  $photoRepository): Response
     {
+    	$photos = $photoRepository->findBy(['chambre' => null]);
         return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
+            'photos' => $photos
         ]);
     }
 

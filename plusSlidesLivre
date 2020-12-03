@@ -1,0 +1,53 @@
+[33mcommit caad152731fc15a488a4f1fec85f4f68c4650fbc[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Wed Dec 2 15:18:30 2020 +0100
+
+    administration restaurants
+
+[33mcommit 73e0fbdff801b9a0bcb1b564532c9626a2257866[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Fri Nov 27 16:06:21 2020 +0100
+
+    up
+
+[33mcommit 3ffc0964538f45d360538ac59092efedcef85b88[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Wed Nov 25 14:00:42 2020 +0100
+
+    edition chambre + vue livre d'or
+
+[33mcommit 7eecb8d5105dab05493dbba8d88cd5bdaf7d7f7f[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Tue Nov 24 16:39:01 2020 +0100
+
+    edition reservation
+
+[33mcommit ba4258bac6a2d38fd9878e489de0bdb37a4522c9[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Fri Nov 20 16:00:21 2020 +0100
+
+    edition reservations
+
+[33mcommit 281756c0c599ba0bce6b7de1e32ad723201593d5[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Wed Nov 18 16:26:37 2020 +0100
+
+    début administration chambres
+
+[33mcommit 7e3a96b016604c5a314ec1e15463ca56b25c3752[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Wed Nov 18 11:27:12 2020 +0100
+
+    connexion/inscription/deconnexion/debut administration
+
+[33mcommit a20301caed358d856c4478a814904c8369be796a[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Tue Nov 17 16:43:00 2020 +0100
+
+    début page accueil/chambre
+
+[33mcommit 9c145a5f9249edbb5d166fa2ae716ecd09f980c0[m
+Author: LADENBURGER Pierre <ladenp@serwl.local>
+Date:   Tue Nov 17 11:41:45 2020 +0100
+
+    creation du projet

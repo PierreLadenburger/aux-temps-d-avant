@@ -2,6 +2,9 @@
 
 {% block title %}Aux Temps d'Avant{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/accueil.css">
+{% endblock %}
 {% block body %}
     {% include 'commun/menu.html.twig' %}
     <div class="container police">
@@ -31,8 +34,14 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
 
                     <!-- Full-width images with number text -->
-                    <div class="slideshow-container">
-
+                    <div class="slides-container">
+                        {% for photo in photos %}
+                            <div class="slides-accueil"
+                                 style="width: 100%; height: 100%; background-size: cover; background-image: url({{ photo.url }})">
+                            </div>
+                        {% endfor %}
+                        <a class="precedent" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="suivant" onclick="plusSlides(1)">&#10095;</a>
                     </div>
 
 
@@ -46,4 +55,7 @@
                     allowfullscreen></iframe>
         </section>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="/js/accueil.js"></script>
 {% endblock %}

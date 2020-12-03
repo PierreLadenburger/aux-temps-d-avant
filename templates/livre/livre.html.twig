@@ -21,8 +21,8 @@
                         <br>
                         <div>{{ livre.nom }}</div>
                         <div>{{ livre.date | date('d-m-Y') }}</div>
-                        <a onclick="plusSlidesBook(-1)" class="commentaire-precedent">&#10094;</a>
-                        <a onclick="plusSlidesBook(1)" class="commentaire-suivant">&#10095;</a>
+                        <a onclick="plusSlidesLivre(-1)" class="commentaire-precedent">&#10094;</a>
+                        <a onclick="plusSlidesLivre(1)" class="commentaire-suivant">&#10095;</a>
                     </div>
                 {% endfor %}
             </div>
