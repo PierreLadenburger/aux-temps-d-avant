@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Commun\GoogleMaps;
+use App\Entity\Livre;
 use App\Entity\Reservation;
 use App\Entity\Restaurant;
+use App\Form\LivreFormType;
 use App\Form\RestaurantFormType;
 use App\Repository\ChambreRepository;
+use App\Repository\LivreRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\RestaurantRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,7 +47,6 @@ class AdministrationController extends AbstractController
      */
     public function administration_reservation(Request  $request, ReservationRepository  $reservationRepository,
                                                ChambreRepository $chambreRepository) {
-        //$em = $this->getDoctrine()->getManager();
         if ($request->isXmlHttpRequest()) {
             $chambre = $chambreRepository->findOneBy(['diminutif' => $request->request->get('chambre')]);
             $reservation = $reservationRepository->findOneBy(['chambre' => $chambre, 'date' => new \DateTime($request->request->get('date'))]);
@@ -69,7 +71,6 @@ class AdministrationController extends AbstractController
 	 */
 	public function administration_restaurant(Request $request,
 	                                          RestaurantRepository  $restaurantRepository) {
-		//$em = $this->getDoctrine()->getManager();
 		$restaurant = new Restaurant();
 		$restaurants = $restaurantRepository->findAll();
 		$formulaire = $this->createForm(RestaurantFormType::class, $restaurant);
@@ -90,6 +91,33 @@ class AdministrationController extends AbstractController
 			'restaurants' => $restaurants
 		]);
 	}
+
+	/**
+	 * @Route("/administration/livre", name="administration_livre")
+	 * @param Request $request
+	 * @param LivreRepository $livreRepository
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 */
+	public function administration_livre(Request $request,
+                                         LivreRepository $livreRepository) {
+		$livre = new Livre();
+		$livres = $livreRepository->findBy([], ['date' => 'desc']);
+		$formulaire = $this->createForm(LivreFormType::class, $livre);
+		$formulaire->handleRequest($request);
+		if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+			$livre = $formulaire->getData();
+			//$livre->setDate(new \DateTime($livre->getDate()));
+			$this->entityManager->persist($livre);
+			$this->entityManager->flush();
+			return $this->redirectToRoute('administration_livre');
+		}
+
+		return $this->render('administration/livre.html.twig', [
+			'formulaire' => $formulaire->createView(),
+			'livres' => $livres
+		]);
+	}
+
 
 	/**
 	 * @Route("/administration/suppression/{id}", name="administration_restaurant_suppression")

@@ -1,4 +1,4 @@
-<ul style="background-color:  #353942;margin-top: 10px; padding-left: 0 !important; list-style-type: none;">
+<ul style="background-color: #353942; margin-top: 10px; padding-left: 0 !important; list-style-type: none;">
     <li><a class="dropdown-item " href="{{ path('administration') }}" style="color: #d7c9b8;" ><i class="fas fa-home"></i> Accueil</a></li>
     <li><a class="dropdown-item " href="{{ path('administration_chambre', { diminutif : 'forge' }) }}" style="color: #d7c9b8;" ><i class="fas fa-bed"></i> La Forge</a></li>
     <li><a class=" dropdown-item" href="{{ path('administration_chambre', { diminutif : 'grange' }) }}" style="color: #d7c9b8;"><i class="fas fa-bed"></i> La Grange</a></li>
@@ -6,6 +6,6 @@
     <li><a class="dropdown-item" href="{{ path('administration_restaurant') }}" style="color: #d7c9b8;"><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>
     <li><a class="dropdown-item" href="" style="color: #d7c9b8;"><i class="fas fa-map-marker-alt"></i> Tourismes</a></li>
     <li><a class="dropdown-item" href="" style="color: #d7c9b8;"><i class="fas fa-star"></i> Ailleurs</a></li>
-    <li><a class="dropdown-item" href="" style="color: #d7c9b8;"><i class="fas fa-book"></i> Livre d'or</a></li>
+    <li><a class="dropdown-item" href="{{ path('administration_livre') }}" style="color: #d7c9b8;"><i class="fas fa-book"></i> Livre d'or</a></li>
     <li><a class="dropdown-item" href="" style="color: #d7c9b8;"><i class="fas fa-book"></i> Photos</a></li>
 </ul>
