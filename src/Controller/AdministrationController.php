@@ -3,15 +3,21 @@
 namespace App\Controller;
 
 use App\Commun\GoogleMaps;
+use App\Entity\Ailleur;
 use App\Entity\Livre;
 use App\Entity\Reservation;
 use App\Entity\Restaurant;
+use App\Entity\Tourisme;
+use App\Form\AilleurFormType;
 use App\Form\LivreFormType;
 use App\Form\RestaurantFormType;
+use App\Form\TourismeFormType;
+use App\Repository\AilleurRepository;
 use App\Repository\ChambreRepository;
 use App\Repository\LivreRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\RestaurantRepository;
+use App\Repository\TourismeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -93,6 +99,17 @@ class AdministrationController extends AbstractController
 	}
 
 	/**
+	 * @Route("/administration/restaurant/suppression/{id}", name="administration_restaurant_suppression")
+	 */
+	public function administration_restaurant_suppression($id, RestaurantRepository $restaurantRepository) {
+		//$em = $this->getDoctrine()->getManager();
+		$restaurant = $restaurantRepository->findOneBy(['id' => $id]);
+		$this->entityManager->remove($restaurant);
+		$this->entityManager->flush();
+		return $this->redirectToRoute('administration_restaurant');
+	}
+
+	/**
 	 * @Route("/administration/livre", name="administration_livre")
 	 * @param Request $request
 	 * @param LivreRepository $livreRepository
@@ -106,28 +123,98 @@ class AdministrationController extends AbstractController
 		$formulaire->handleRequest($request);
 		if ($formulaire->isSubmitted() && $formulaire->isValid()) {
 			$livre = $formulaire->getData();
-			//$livre->setDate(new \DateTime($livre->getDate()));
 			$this->entityManager->persist($livre);
 			$this->entityManager->flush();
 			return $this->redirectToRoute('administration_livre');
 		}
-
 		return $this->render('administration/livre.html.twig', [
 			'formulaire' => $formulaire->createView(),
 			'livres' => $livres
 		]);
 	}
 
+	/**
+	 * @Route("/administration/livre/suppression/{id}", name="administration_livre_suppression")
+	 * @param $id
+	 * @param LivreRepository $livreRepository
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 */
+	public function administration_livre_suppression($id, LivreRepository $livreRepository) {
+		$livre = $livreRepository->findOneBy(['id' => $id]);
+		$this->entityManager->remove($livre);
+		$this->entityManager->flush();
+		return $this->redirectToRoute('administration_livre');
+	}
 
 	/**
-	 * @Route("/administration/suppression/{id}", name="administration_restaurant_suppression")
+	 * @Route("/administration/ailleur", name="administration_ailleur")
+	 * @param Request $request
+	 * @param LivreRepository $livreRepository
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
 	 */
-	public function administration_restaurant_suppression($id, RestaurantRepository $restaurantRepository) {
-		//$em = $this->getDoctrine()->getManager();
-		$restaurant = $restaurantRepository->findOneBy(['id' => $id]);
-		$this->entityManager->remove($restaurant);
+	public function administration_ailleur(Request $request,
+	                                     AilleurRepository $ailleurRepository)
+	{
+		$ailleur = new Ailleur();
+		$ailleurs = $ailleurRepository->findAll();
+		$formulaire = $this->createForm(AilleurFormType::class, $ailleur);
+		$formulaire->handleRequest($request);
+		if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+			$ailleur = $formulaire->getData();
+			$adresse = $this->googleMaps->recupererGoogleMapsAdresse($ailleur->getAdresse());
+			$ailleur->setAdresse($adresse['results'][0]['formatted_address']);
+			$ailleur->setLat($adresse['results'][0]['geometry']['location']['lat']);
+			$ailleur->setLng($adresse['results'][0]['geometry']['location']['lng']);
+			$this->entityManager->persist($ailleur);
+			$this->entityManager->flush();
+			return $this->redirectToRoute('administration_ailleur');
+		}
+		return $this->render('administration/ailleur.html.twig', [
+			'formulaire' => $formulaire->createView(),
+			'ailleurs' => $ailleurs
+		]);
+	}
+
+	/**
+	 * @Route("/administration/ailleur/suppression/{id}", name="administration_ailleur_suppression")
+	 * @param $id
+	 * @param AilleurRepository $ailleurRepository
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 */
+	public function administration_ailleur_suppression($id, AilleurRepository $ailleurRepository) {
+		$ailleur = $ailleurRepository->findOneBy(['id' => $id]);
+		$this->entityManager->remove($ailleur);
 		$this->entityManager->flush();
-		return $this->redirectToRoute('administration_restaurant');
+		return $this->redirectToRoute('administration_ailleur');
+	}
+
+	/**
+	 * @Route("/administration/tourisme", name="administration_tourisme")
+	 * @param Request $request
+	 * @param LivreRepository $livreRepository
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 */
+	public function administration_tourisme(Request $request,
+	                                       TourismeRepository $tourismeRepository)
+	{
+		$tourisme = new Tourisme();
+		$tourismes = $tourismeRepository->findAll();
+		$formulaire = $this->createForm(TourismeFormType::class, $tourisme);
+		$formulaire->handleRequest($request);
+		if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+			$tourisme = $formulaire->getData();
+			$adresse = $this->googleMaps->recupererGoogleMapsAdresse($tourisme->getAdresse());
+			$tourisme->setAdresse($adresse['results'][0]['formatted_address']);
+			$tourisme->setLat($adresse['results'][0]['geometry']['location']['lat']);
+			$tourisme->setLng($adresse['results'][0]['geometry']['location']['lng']);
+			$this->entityManager->persist($tourisme);
+			$this->entityManager->flush();
+			return $this->redirectToRoute('administration_tourisme');
+		}
+		return $this->render('administration/tourisme.html.twig', [
+			'formulaire' => $formulaire->createView(),
+			'tourismes' => $tourismes
+		]);
 	}
 
     /**
@@ -141,7 +228,6 @@ class AdministrationController extends AbstractController
     public function administration_forge($diminutif, Request  $request, ReservationRepository  $reservationRepository,
                                          ChambreRepository $chambreRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
 	    $chambre = $chambreRepository->findOneBy(['diminutif' => $diminutif]);
         $reservations = $reservationRepository->recupererReservations($chambre);
         /*if ($request->isMethod('POST')) {

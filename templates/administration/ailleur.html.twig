@@ -10,7 +10,7 @@
                 {% include 'commun/menu-admin.html.twig' %}
             </div>
             <div class="col-sm-9 col-md-9 col-lg-10 col-xl-10">
-                <h2 class="titre">Livre d'or</h2>
+                <h2 class="titre">Ailleurs</h2>
                 <button type="button" class="btn btn-lg mb-3" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-plus"></i>
                     Ajouter
@@ -27,7 +27,7 @@
 
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter un commentaire</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter un coup de coeur</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -38,10 +38,13 @@
                                                 {{ form_row(formulaire.nom) }}
                                             </fieldset>
                                             <fieldset class="form-group">
-                                                {{ form_row(formulaire.date) }}
+                                                {{ form_row(formulaire.adresse) }}
                                             </fieldset>
                                             <fieldset class="form-group">
-                                                {{ form_row(formulaire.commentaire) }}
+                                                {{ form_row(formulaire.site) }}
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                {{ form_row(formulaire.categorie) }}
                                             </fieldset>
                                         </section>
                                     </div>
@@ -61,18 +64,20 @@
                                 <thead>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Date</th>
-                                        <th>Commentaire</th>
+                                        <th>Adresse</th>
+                                        <th>Site</th>
+                                        <th>Catégorie</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for livre in livres %}
+                                    {% for ailleur in ailleurs %}
                                         <tr>
-                                            <td>{{ livre.nom }}</td>
-                                            <td>{{ livre.date | date('d-m-Y')}}</td>
-                                            <td>{{ livre.commentaire }}</td>
-                                            <td><a href="{{ path('administration_livre_suppression', { id : livre.id }) }}"><i class="far fa-trash-alt text-danger"></i></a></td>
+                                            <td>{{ ailleur.nom }}</td>
+                                            <td>{{ ailleur.adresse }}</td>
+                                            <td>{{ ailleur.site }}</td>
+                                            <td>{{ ailleur.categorie }}</td>
+                                            <td><a href="{{ path('administration_ailleur_suppression', { id : ailleur.id }) }}"><i class="far fa-trash-alt text-danger"></i></a></td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>

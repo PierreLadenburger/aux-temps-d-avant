@@ -30,8 +30,8 @@
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Divers</a></li> -->
                 </ul>
             </li>
-            <li><a class="nav-link js-scroll-trigger" href="{{ path('ailleur') }}" ><i class="fas fa-star"></i> Ailleurs</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="" ><i class="fas fa-phone"></i> Contact</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="{{ path('ailleur') }}" ><i class="fas fa-heart"></i> Ailleurs</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="{{ path('contact') }}" ><i class="fas fa-phone"></i> Contact</a></li>
             {% if app.user %}
                 <li><a class="nav-link" href="{{ path('administration') }}"><i class="fas fa-user-cog"></i></a> </li>
                 <li><a class="nav-link" href="{{ path('deconnexion') }}"><i class="fas fa-sign-out-alt"></i></a> </li>
