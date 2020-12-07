@@ -7,7 +7,30 @@
     <div class="container police">
         <h2 class="titre">Contact</h2>
         <div class="row">
-            {{ form(formulaire) }}
+            <section class="w-100">
+                {{ form_start(formulaire) }}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <fieldset class="form-group">
+                    {{ form_row(formulaire.email) }}
+                </fieldset>
+                <fieldset class="form-group">
+                    {{ form_row(formulaire.nom) }}
+                </fieldset>
+                <fieldset class="form-group">
+                    {{ form_row(formulaire.prenom) }}
+                </fieldset>
+                <fieldset class="form-group">
+                    {{ form_row(formulaire.message) }}
+                </fieldset>
+                <fieldset class="form-group">
+                    {{ form_row(formulaire.envoyer) }}
+                </fieldset>
+            </section>
+                {{ form_end(formulaire) }}
         </div>
     </div>
 {% endblock %}
