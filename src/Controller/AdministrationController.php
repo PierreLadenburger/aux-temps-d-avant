@@ -5,21 +5,25 @@ namespace App\Controller;
 use App\Commun\GoogleMaps;
 use App\Entity\Ailleur;
 use App\Entity\Livre;
+use App\Entity\Photo;
 use App\Entity\Reservation;
 use App\Entity\Restaurant;
 use App\Entity\Tourisme;
 use App\Form\AilleurFormType;
 use App\Form\LivreFormType;
+use App\Form\PhotoFormType;
 use App\Form\RestaurantFormType;
 use App\Form\TourismeFormType;
 use App\Repository\AilleurRepository;
 use App\Repository\ChambreRepository;
 use App\Repository\LivreRepository;
+use App\Repository\PhotoRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\RestaurantRepository;
 use App\Repository\TourismeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -217,7 +221,46 @@ class AdministrationController extends AbstractController
 		]);
 	}
 
-    /**
+	/**
+	 * @Route("/administration/photo", name="administration_photo")
+	 * @param Request $request
+	 * @param PhotoRepository $photoRepository
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 */
+	public function administration_photo(Request $request,
+	                                     PhotoRepository $photoRepository)
+	{
+		$photo = new Photo();
+		$photos = $photoRepository->findBy([], ['chambre' => 'ASC']);
+		$formulaire = $this->createForm(PhotoFormType::class, $photo);
+		$formulaire->handleRequest($request);
+		if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+			$photo = $formulaire->getData();
+			$fichier = $formulaire->get('url')->getData();
+			if ($fichier) {
+				$nomDuFichierOrigine = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+				$nomDuFichier =  $nomDuFichierOrigine . '.' . $fichier->guessExtension();
+				try {
+					$fichier->move(
+						$this->getParameter('dossier_photos'),
+						$nomDuFichier
+					);
+				} catch (FileException $e) {
+
+				}
+				$photo->setUrl('/uploads/' . $nomDuFichier);
+				$this->entityManager->persist($photo);
+				$this->entityManager->flush();
+				$this->redirectToRoute('administration_photo');
+			}
+		}
+		return $this->render('administration/photo.html.twig', [
+			'formulaire' => $formulaire->createView(),
+			'photos' => $photos
+		]);
+	}
+
+	/**
      * @Route("/administration/{diminutif}", name="administration_chambre")
      * @param Request $request
      * @param ReservationRepository $reservationRepository
