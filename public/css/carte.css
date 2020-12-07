@@ -2,7 +2,20 @@
     width: 100%;
     height: 500px;
 }
+
 .carte-container {
     position: sticky;
     top: 150px;
+}
+
+.marqueur-carte {
+    background-color: darkred !important;
+    border-color: darkred; !important;
+    box-shadow: none !important;
+}
+
+.marqueur-carte:hover {
+    background-color: darkred !important;
+    border-color: darkred; !important;
+    box-shadow: none !important;
 }

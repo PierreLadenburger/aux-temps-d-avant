@@ -4,11 +4,14 @@
         lat: 48.903975,
         lng: 7.661313
     };
+
     var flightPath;
+
     var map = new google.maps.Map(document.getElementById('carte'), {
         zoom: 10,
         center: pos
     });
+
     var marker = new google.maps.Marker({
         position: pos,
         map: map,
@@ -16,4 +19,22 @@
         title: "Aux temps d'avant",
         icon: "/images/marqueurA.png"
     });
+
+    $(document).on('click', '#trajet', function () {
+
+        let position = $(this).val().split('|');
+
+        var pos = {
+            lat: parseFloat(position[0]),
+            lng: parseFloat(position[1])
+        };
+
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            name: position[2],
+            title: position[2],
+            icon: "/images/marqueurB.png"
+        });
+    })
 </script>

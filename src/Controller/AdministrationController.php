@@ -225,8 +225,8 @@ class AdministrationController extends AbstractController
      * @return Response
      * @throws \Exception
      */
-    public function administration_forge($diminutif, Request  $request, ReservationRepository  $reservationRepository,
-                                         ChambreRepository $chambreRepository): Response
+    public function administration_chambre($diminutif, Request  $request, ReservationRepository  $reservationRepository,
+                                            ChambreRepository $chambreRepository): Response
     {
 	    $chambre = $chambreRepository->findOneBy(['diminutif' => $diminutif]);
         $reservations = $reservationRepository->recupererReservations($chambre);

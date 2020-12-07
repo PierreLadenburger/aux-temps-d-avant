@@ -2,6 +2,10 @@
 
 {% block title %}Ailleurs{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/carte.css">
+{% endblock %}
+
 {% block body %}
     {% include 'commun/menu.html.twig' %}
     <div class="container police">
@@ -21,5 +25,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
     {% include 'commun/carte.html.twig' with { 'ailleurs' : ailleurs } %}
 {% endblock %}

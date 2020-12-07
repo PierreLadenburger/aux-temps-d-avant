@@ -32,7 +32,7 @@ function slidesGrange() {
             indexGrange = 1;
         }
         slides[indexGrange - 1].style.display = "block";
-        setTimeout(slidesForge, 4000);
+        setTimeout(slidesGrange, 4000);
     }
 }
 
@@ -47,6 +47,6 @@ function slidesAlcove() {
             indexAlcove = 1;
         }
         slides[indexAlcove - 1].style.display = "block";
-        setTimeout(slidesForge, 4000);
+        setTimeout(slidesAlcove, 4000);
     }
 }
