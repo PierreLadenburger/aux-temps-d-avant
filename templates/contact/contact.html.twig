@@ -7,30 +7,44 @@
     <div class="container police">
         <h2 class="titre">Contact</h2>
         <div class="row">
-            <section class="w-100">
-                {{ form_start(formulaire) }}
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                <fieldset class="form-group">
-                    {{ form_row(formulaire.email) }}
-                </fieldset>
-                <fieldset class="form-group">
-                    {{ form_row(formulaire.nom) }}
-                </fieldset>
-                <fieldset class="form-group">
-                    {{ form_row(formulaire.prenom) }}
-                </fieldset>
-                <fieldset class="form-group">
-                    {{ form_row(formulaire.message) }}
-                </fieldset>
-                <fieldset class="form-group">
-                    {{ form_row(formulaire.envoyer) }}
-                </fieldset>
-            </section>
-                {{ form_end(formulaire) }}
+            <div class="col-lg-4 col-md-4 sol-sm-12">
+                <h5 class="font-weight-bold titre-partie">Propriétaires</h5>
+                <ul class="fa-ul">
+                    <li><span class="fa-li"><i class="fas fa-user"></i></span> Carine & Christian Cura</li>
+                    <li><span class="fa-li"><i class="fas fa-phone"></i></span> +33 (0)6 76 56 90 33</li>
+                    <li><span class="fa-li"><i class="fas fa-flag"></i></span> Français & Allemand</li>
+                    <li><span class="fa-li"><i class="fas fa-map-marker-alt"></i></span> 24 Grand Rue, 67110 Gundershoffen</li>
+                </ul>
+                <p style="color: #d3d0cd;">Les chiens peuvent être acceptés sur demande.</p>
+            </div>
+            <div class="col-lg-8 col-md-8 sol-sm-12">
+                <section class="w-100">
+                    <h5 class="font-weight-bold titre-partie">Envoyer un message ...</h5>
+                    {{ form_start(formulaire, {'attr': {'class': 'ml-0'}}) }}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <fieldset class="form-group">
+                        {{ form_row(formulaire.email) }}
+                    </fieldset>
+                    <fieldset class="form-group">
+                        {{ form_row(formulaire.nom) }}
+                    </fieldset>
+                    <fieldset class="form-group">
+                        {{ form_row(formulaire.prenom) }}
+                    </fieldset>
+                    <fieldset class="form-group">
+                        {{ form_row(formulaire.message) }}
+                    </fieldset>
+                    <fieldset class="form-group">
+                        {{ form_row(formulaire.envoyer) }}
+                    </fieldset>
+                    {{ form_end(formulaire) }}
+                </section>
+
+            </div>
         </div>
     </div>
 {% endblock %}

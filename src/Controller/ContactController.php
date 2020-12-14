@@ -22,10 +22,13 @@ class ContactController extends AbstractController
 
 	}
 
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function index(Request $request): Response
+	/**
+	 * @Route("/contact", name="contact")
+	 * @param Request $request
+	 * @param \Swift_Mailer $mailer
+	 * @return Response
+	 */
+    public function index(Request $request, \Swift_Mailer $mailer): Response
     {
         $contact = new Contact();
         $formulaire = $this->createForm(ContactFormType::class, $contact);
@@ -34,6 +37,13 @@ class ContactController extends AbstractController
 			$contact = $formulaire->getData();
 	        $this->entityManager->persist($contact);
 	        $this->entityManager->flush();
+	        $message = (new \Swift_Message('Nouveau message sur le site internet'))
+	                    ->setFrom($contact->getEmail())
+		                ->addReplyTo($contact->getEmail())
+	                    ->setTo('pladenburger67@gmail.com')
+		                ->setBody($this->renderView('commun/email.html.twig', ['contact' => $contact]), 'text/html')
+		                ->addPart($this->renderView('commun/email.txt.twig', ['contact' => $contact]), 'text/plain');
+	        $mailer->send($message);
 	        $this->addFlash('success', 'Message envoyé');
 	        $this->redirectToRoute('contact');
         }

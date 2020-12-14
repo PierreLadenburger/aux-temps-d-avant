@@ -18,7 +18,7 @@ class ContactFormType extends AbstractType
             ->add('email', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('nom', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('prenom', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('message', TextareaType::class, ['attr' => ['class' => 'form-control']])
+            ->add('message', TextareaType::class, ['attr' => ['class' => 'form-control', 'rows' => 8]])
             ->add('envoyer', SubmitType::class, ['attr' => ['class' => 'btn btn-lg w-100']])
 
         ;
