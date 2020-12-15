@@ -43,12 +43,30 @@ class AdministrationController extends AbstractController
 	}
 
 	/**
-     * @Route("/administration", name="administration")
-     */
-    public function index(): Response
+	 * @Route("/administration", name="administration")
+	 * @param ReservationRepository $reservationRepository
+	 * @param RestaurantRepository $restaurantRepository
+	 * @param TourismeRepository $tourismeRepository
+	 * @param AilleurRepository $ailleurRepository
+	 * @return Response
+	 */
+    public function index(ReservationRepository  $reservationRepository, RestaurantRepository $restaurantRepository,
+                            TourismeRepository  $tourismeRepository, AilleurRepository $ailleurRepository): Response
     {
+    	$nombreReservationsForge = $reservationRepository->findBy(['chambre' => 1]);
+	    $nombreReservationsGrange = $reservationRepository->findBy(['chambre' => 2]);
+	    $nombreReservationsAlcove = $reservationRepository->findBy(['chambre' => 3]);
+		$nombreTourismes = $tourismeRepository->findAll();
+		$nombreRestaurants = $restaurantRepository->findAll();
+		$nombreAilleurs = $ailleurRepository->findAll();
+
         return $this->render('administration/index.html.twig', [
-            'controller_name' => 'AdministrationController',
+            'nombreReservationsForge' => count($nombreReservationsForge),
+	        'nombreReservationsGrange' => count($nombreReservationsGrange),
+	        'nombreReservationsAlcove' => count($nombreReservationsAlcove),
+	        'nombreTourismes' => count($nombreTourismes),
+	        'nombreRestaurants' => count($nombreRestaurants),
+	        'nombreAilleurs' => count($nombreAilleurs)
         ]);
     }
 

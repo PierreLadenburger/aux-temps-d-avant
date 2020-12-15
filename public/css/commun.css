@@ -76,3 +76,9 @@ td {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
     display: inline-block;
 }
+
+.menu-admin-item {
+    width: 25% !important;
+    display: inline flow-root list-item !important;
+    text-align: center !important;
+}

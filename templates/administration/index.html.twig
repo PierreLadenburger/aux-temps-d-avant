@@ -6,12 +6,23 @@
     {% include 'commun/menu.html.twig' %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xl-2">
                 {% include 'commun/menu-admin.html.twig' %}
             </div>
-            <div class="col-sm-9 col-md-9 col-lg-10 col-xl-10">
-                <h2 class="titre">Administration</h2>
+            <div class="col-sm-12 col-md-9 col-lg-10 col-xl-10">
+                <h2 class="titre">Général</h2>
+                <div class="row">
 
+                    <div class="col-lg-12 col-md-12">
+                        <p class="mb-0">Nombre de réservations pour la forge : {{ nombreReservationsForge }}</p>
+                        <p class="mb-0">Nombre de réservations pour la grange : {{ nombreReservationsForge }}</p>
+                        <p class="mb-0">Nombre de réservations pour l'alcôve : {{ nombreReservationsForge }}</p>
+                        <p class="mb-0">Nombre de lieux à visiter : {{ nombreTourismes }}</p>
+                        <p class="mb-0">Nombre de restaurants : {{ nombreRestaurants }}</p>
+                        <p class="mb-0">Nombre de coups de coeur : {{ nombreAilleurs }}</p>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
