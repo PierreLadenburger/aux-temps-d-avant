@@ -35,6 +35,13 @@ form {
     color: rgb(53, 57, 66);
 }
 
+.reserve-block {
+    height: 25px;
+    width: 25px;
+    background-color: #CF0A1D;
+    border: solid 2px #CF0A1D;
+}
+
 .titre-partie {
     color : rgb(53, 57, 66) !important;
 }
