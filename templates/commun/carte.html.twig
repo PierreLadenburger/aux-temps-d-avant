@@ -6,11 +6,19 @@
     };
 
     var flightPath;
+    var map;
 
-    var map = new google.maps.Map(document.getElementById('carte'), {
-        zoom: 10,
-        center: pos
-    });
+    {% if ailleurs is defined %}
+        map = new google.maps.Map(document.getElementById('carte'), {
+            zoom: 5,
+            center: pos
+        });
+    {% else %}
+        map = new google.maps.Map(document.getElementById('carte'), {
+            zoom: 10,
+            center: pos
+        });
+    {% endif %}
 
     var marker = new google.maps.Marker({
         position: pos,
