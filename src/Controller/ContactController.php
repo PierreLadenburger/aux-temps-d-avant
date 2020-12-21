@@ -40,7 +40,7 @@ class ContactController extends AbstractController
 	        $message = (new \Swift_Message('Nouveau message sur le site internet'))
 	                    ->setFrom($contact->getEmail())
 		                ->addReplyTo($contact->getEmail())
-	                    ->setTo('pladenburger67@gmail.com')
+	                    ->setTo('carinecura@gmail.com')
 		                ->setBody($this->renderView('commun/email.html.twig', ['contact' => $contact]), 'text/html')
 		                ->addPart($this->renderView('commun/email.txt.twig', ['contact' => $contact]), 'text/plain');
 	        $mailer->send($message);
