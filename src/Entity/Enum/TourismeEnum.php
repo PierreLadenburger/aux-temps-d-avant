@@ -11,6 +11,7 @@ abstract  class TourismeEnum
 	const MUSEE = "musee";
 	const MEMOIRE = "memoire";
 	const TERROIR = "terroir";
+	const JARDIN = "jardin";
 	const DIVERS = "divers";
 
 
@@ -21,6 +22,7 @@ abstract  class TourismeEnum
 		self::MUSEE    => 'Musées',
 		self::MEMOIRE => 'Mémoires',
 		self::TERROIR => 'Terroirs',
+		self::JARDIN => 'Jardins',
 		self::DIVERS => 'Divers'
 	];
 	/**
@@ -52,6 +54,7 @@ abstract  class TourismeEnum
 			self::MUSEE,
 			self::MEMOIRE,
 			self::TERROIR,
+			self::JARDIN,
 			self::DIVERS
 		];
 	}
