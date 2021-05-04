@@ -1,7 +1,7 @@
 <div class="mb-4">
     <h5 class="mb-0 font-weight-bold titre-partie">{{ commerce.nom }}</h5>
     <p class="mb-0">{{ commerce.adresse }}</p>
-    <p class="mb-0"><a style="color: darkred;" href="{{ commerce.site }}">{{ commerce.site }}</a></p>
+    <p class="mb-0"><a target="_blank" style="color: darkred;" href="{{ commerce.site }}">{{ commerce.site }}</a></p>
     {% if commerce.categorie is defined %}
         {% if commerce.categorie == 'maison' %}
             <p class="mb-0">Maison de vacances</p>
