@@ -8,9 +8,13 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
+public/uploads/coup_de_coeur_de_noel.mov
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+
+
+
