@@ -1,17 +1,18 @@
-<div class="mb-4">
-    <h5 class="mb-0 font-weight-bold titre-partie">{{ commerce.nom }}</h5>
-    <p class="mb-0">{{ commerce.adresse }}</p>
-    <p class="mb-0"><a target="_blank" style="color: darkred;" href="{{ commerce.site }}">{{ commerce.site }}</a></p>
-    {% if commerce.categorie is defined %}
-        {% if commerce.categorie == 'maison' %}
-            <p class="mb-0">Maison de vacances</p>
-        {% elseif commerce.categorie == 'chambre' %}
-            <p class="mb-0">Chambre d'hôtes</p>
-        {% else %}
-            <p class="mb-0"></p>
-        {% endif %}
-    {% endif %}
-    <button class="btn marqueur-carte" id="trajet" value="{{ commerce.lat ~ "|" ~ commerce.lng ~ "|" ~ commerce.nom }}">
-        <i class="fas fa-map-marker-alt text-white"></i>
-    </button>
+<div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+    <div class="commerce-block">
+        <h5 class="commerce-block-titre">{{ commerce.nom }}</h5>
+        <div class="commerce-block-adresse">
+            <div>
+            {% set parts = commerce.adresse | split(',', 2) %}
+               <p class="mb-0">{{ parts[0] }}</p>
+               <p class="mb-0">{{ parts[1] }}</p>               
+               </div>
+                <button class="btn marqueur-carte" id="trajet" value="{{ commerce.lat ~ "|" ~ commerce.lng ~ "|" ~ commerce.nom }}">
+            <i class="fas fa-map-marker-alt" style="color: darkred;"></i>
+        </button>
+        </div>
+     
+        <p class="mb-0"><a target="_blank" style="color: #231f1c;" href="{{ commerce.site }}">{{ commerce.site }}</a></p>
+    
+    </div>
 </div>

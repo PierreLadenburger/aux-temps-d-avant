@@ -2,6 +2,14 @@
 
 {% block title %}Administration{% endblock %}
 
+{% block stylesheets %}
+<style>
+    body {
+        background: #e8dbc7 !important;
+    }
+</style>
+
+{% endblock %}
 {% block body %}
     {% include 'commun/menu.html.twig' %}
     <div class="container">
@@ -10,16 +18,16 @@
                 {% include 'commun/menu-admin.html.twig' %}
             </div>
             <div class="col-sm-12 col-md-9 col-lg-10 col-xl-10">
-                <h2 class="titre">Général</h2>
-                <div class="row">
+             
+                <div class="row" style="margin-top: 10px;">
 
                     <div class="col-lg-12 col-md-12">
-                        <p class="mb-0">Nombre de réservations pour la forge : {{ nombreReservationsForge }}</p>
-                        <p class="mb-0">Nombre de réservations pour la grange : {{ nombreReservationsGrange }}</p>
-                        <p class="mb-0">Nombre de réservations pour l'alcôve : {{ nombreReservationsAlcove }}</p>
-                        <p class="mb-0">Nombre de lieux à visiter : {{ nombreTourismes }}</p>
-                        <p class="mb-0">Nombre de restaurants : {{ nombreRestaurants }}</p>
-                        <p class="mb-0">Nombre de coups de coeur : {{ nombreAilleurs }}</p>
+                        <p class="mb-0" style="color: #231f1c !important;">Nombre de réservations pour la forge : {{ nombreReservationsForge }}</p>
+                        <p class="mb-0" style="color: #231f1c !important;">Nombre de réservations pour la grange : {{ nombreReservationsGrange }}</p>
+                        <p class="mb-0" style="color: #231f1c !important;">Nombre de réservations pour l'alcôve : {{ nombreReservationsAlcove }}</p>
+                        <p class="mb-0" style="color: #231f1c !important;">Nombre de lieux à visiter : {{ nombreTourismes }}</p>
+                        <p class="mb-0" style="color: #231f1c !important;">Nombre de restaurants : {{ nombreRestaurants }}</p>
+                        <p class="mb-0" style="color: #231f1c !important;">Nombre de coups de coeur : {{ nombreAilleurs }}</p>
 
                     </div>
                 </div>

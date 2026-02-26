@@ -1,0 +1,215 @@
+
+.points {
+  position: absolute;
+  bottom: 30px;
+   left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.points span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.points span.active {
+  background: white;
+  transform: scale(1.3);
+}
+
+.section-chambre {
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr 360px; /* ✅ nouvelles proportions */
+  height: 70vh; /* ✅ hauteur réduite */
+  background: #e8dbc7;
+  color: #231f1c;
+  position: relative;
+  overflow: hidden;
+  padding-top: 30px; /* à voir */
+}
+
+/* Texte à gauche */
+.chambre-texte {
+  background: #231f1c;
+  color: white;
+  position: relative;
+  /*display: flex;
+  align-items: center;*/
+  padding: 2rem;
+  color: #e8dbc7;
+}
+
+.chambre-texte .contenu h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.chambre-texte ul {
+  list-style: none;
+  padding: 0;
+}
+
+.chambre-texte li::before {
+  content: "• ";
+}
+
+/* Diaporama */
+.chambre-image {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.chambre-image .slides {
+  width: 100%;
+  height: 100%;
+  position: absolute; 
+  top: 0; 
+  left: 0;
+}
+
+.chambre-image .slides img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.chambre-image .slides img:first-child {
+  opacity: 1;
+}
+
+.chambre-image .slides img.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.degrade-gauche {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 25%; /* ✅ effet sur le bord gauche */
+  background: linear-gradient(to right, #231f1c, transparent);
+  z-index: 2;
+}
+
+/* Colonne tarifs + dispo */
+.chambre-aside {
+  background: #e8dbc7;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Tableau tarifs */
+.tarifs h3,
+.disponibilites h3 {
+  text-align: right;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.tarifs table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.tarifs th,
+.tarifs td {
+  border: 2px solid #231f1c;
+  padding: 0.5rem;
+}
+
+.tarifs .details {
+  font-size: 0.9rem;
+  color: #231f1c !important;
+  text-align: center;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+.tarifs .details .taxe {
+  font-weight: bold;
+}
+
+.avis-client {
+  width: 100%;
+  height: 30vh;
+  background: #e8dbc7;
+  display: flex;
+ /* align-items: center;*/
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 4rem;
+  color: #231f1c;
+}
+
+.avis-container {
+  width: 100%;
+  border-top: 2px solid #231f1c;
+  /*max-width: 900px;*/
+  position: relative;
+}
+
+.avis {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  margin-top: 15px;
+}
+
+.avis.active {
+  opacity: 1;
+  position: relative;
+}
+
+.avis blockquote {
+  margin: 0;
+  font-style: italic;
+  text-align: center;
+  font-size: 12px;
+}
+
+.avis footer {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* Flèches de navigation */
+.avis-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #231f1c;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.avis-nav:hover {
+  color: #7a6a58;
+}
+
+.avis-nav.prev {
+  left: 20px;
+}
+
+.avis-nav.next {
+  right: 20px;
+}
+
+

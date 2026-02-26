@@ -39,3 +39,22 @@
     width: 100%;
     border-radius: 5px;
 }
+
+.video-fondu {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 500px;
+  height: 300px;
+  /*border-radius: 12px;*/
+  overflow: hidden;
+  z-index: 20; /* ✅ au-dessus du fond */
+  /*box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;*/
+}
+
+.video-fondu:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+}

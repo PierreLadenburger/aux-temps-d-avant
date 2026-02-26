@@ -7,11 +7,96 @@
 {% endblock %}
 {% block body %}
     {% include 'commun/menu.html.twig' %}
-    <div class="container police">
+ <section class="section-fondu">
+  <div class="texte">
+      <p><span style="margin-left: 4rem"></span>
+        Dans son écrin de verdure au coeur du village nous avions acquis cet ancien corps de ferme typiquement alsacien
+        datant de 1717 à l'état de ruines et l'avons rénové dans le respect des traditions et avec la passion des vieilles pierres.
+        </p>
+        <p><span style="margin-left: 4rem"></span>
+        Ambiance cosy ou romantique mais de toute façon authentique, pour nos chambres indépendantes et
+        spacieuses qui ont été aménagées à l’étage de l’ancienne forge et de l’ancienne grange. Nous vous y proposons également un espace détente où nous avons le plaisir de vous offrir du thé et du café.
+        </p>
+        <p><span style="margin-left: 4rem"></span>
+            Meubles de famille ou objets chinés contribuent à l'atmosphère de sérénité, mêlant un soupçon de modernité avec un maximun de confort.
+                        Une entrée propre à chaque chambre permet un accès en toute liberté.
+                   
+                        Le petit déjeuner est servi à partir de 9h dans l'ancienne étable encore pourvue de sa mangeoire ou sur
+                        la terrasse donnant sur le jardin en été.
+                    </p>
+                    <p><span style="margin-left: 4rem"></span>
+                        À 30 minutes de Strasbourg, le village est situé à l’entrée du Parc naturel
+                        régional des Vosges du Nord.
+                     
+                        Parsemée de ruines de châteaux, terre d'Histoire, la région offre de nombreuses découvertes et activités. Parmis les sites les plus prisés, vous trouverez les villages aux maisons traditionnelles, les cités potières, verrières ou thermales ainsi que les vestiges militaires
+                    </p>
+        <div class="points">
+                 {% for photo in photos %}
+       <span></span>
+                       
+                            {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="images-fondu">
+   
+     {% for photo in photos %}
+      <img src={{ photo.url }} alt="">
+                       
+                            {% endfor %}
+
+
+    <div class="degrade-gauche"></div>
+
+    
+  </div>
+
+  <iframe
+    class="video-fondu"
+    height="630" 
+    width="455"
+    src="https://www.youtube.com/embed/1Vh6tAqlblg?autoplay=1&mute=1&controls=0&modestbranding=1&showinfo=0"
+    title="Vidéo"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+></iframe>
+
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll(".images-fondu img");
+  const points = document.querySelectorAll(".points span");
+  const duration = 6000; // 6 secondes
+  let index = 0;
+
+  // ✅ première image visible immédiatement (sans transition)
+  images[0].classList.add("active");
+  images[0].style.transition = "none";
+  points[0].classList.add("active");
+
+  // relancer la transition normale après un court délai
+  setTimeout(() => {
+    images[0].style.transition = "opacity 1.5s ease-in-out";
+  }, 100);
+
+  // Boucle du slider
+  setInterval(() => {
+    images[index].classList.remove("active");
+    points[index].classList.remove("active");
+
+    index = (index + 1) % images.length;
+
+    images[index].classList.add("active");
+    points[index].classList.add("active");
+  }, duration);
+});
+</script>
+   <!-- <div class="container police">
         <section class="resume-section" id="apropos" style="padding-top: 10px!important;">
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <h2>Aux Temps d'Avant</h2>
+                <div class="col-lg-6 col-md-12 col-sm-12">            
                     <p>
                         Dans son écrin de verdure au coeur du village nous avions acquis cet ancien corps de ferme typiquement alsacien
                         datant de 1717 à l'état de ruines et l'avons rénové dans le respect des traditions et avec la passion des vieilles pierres.
@@ -33,7 +118,8 @@
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12">
 
-                    <!-- Full-width images with number text -->
+               
+                    
                     <div style="height: 450px;">
                         <div class="slides-container">
                             {% for photo in photos %}
@@ -50,13 +136,13 @@
                 </div>
             </div>
         </section>
-        <section class="resume-section" id="video">
+       <section class="resume-section" id="video">
             <h2>Vidéo</h2>
             <iframe class="video" height="631" width="455"
                     src="https://www.youtube.com/embed/1Vh6tAqlblg?autoplay=1&showinfo=0" frameborder="0"
                     allowfullscreen></iframe>
         </section>
-    </div>
+    </div> -->
 {% endblock %}
 {% block javascripts %}
     <script src="/js/accueil.js"></script>

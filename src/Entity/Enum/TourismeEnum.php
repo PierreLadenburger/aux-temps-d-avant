@@ -6,6 +6,7 @@ namespace App\Entity\Enum;
 
 abstract  class TourismeEnum
 {
+	const RESTAURANT = "restaurant";
 	const BALADE    = "balade";
 	const CITE = "cite";
 	const MUSEE = "musee";
@@ -17,6 +18,7 @@ abstract  class TourismeEnum
 
 	/** @var array user friendly named type */
 	protected static $typeName = [
+		self::RESTAURANT    => 'Restaurants',
 		self::BALADE    => 'Balades',
 		self::CITE => 'Cités',
 		self::MUSEE    => 'Musées',
@@ -49,6 +51,7 @@ abstract  class TourismeEnum
 	public static function getAvailableTypes()
 	{
 		return [
+			self::RESTAURANT,
 			self::BALADE,
 			self::CITE,
 			self::MUSEE,

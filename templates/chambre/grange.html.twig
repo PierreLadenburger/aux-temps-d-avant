@@ -2,9 +2,13 @@
 
 {% block title %}{{ chambre.nom }}{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/chambre.css">
+{% endblock %}
+
 {% block body %}
     {% include 'commun/menu.html.twig' %}
-    <div class="container police">
+   <!-- <div class="container police">
         <h2 class="titre">{{ chambre.nom }}</h2>
         <div class="row">
             <div class="col-lg-6 col-md-12 col-sm-12">
@@ -78,6 +82,140 @@
         </div>
 
     </div>
+    -->
+<section class="section-chambre">
+  <div class="chambre-texte">
+    <div class="contenu">
+      <h2 class="text-center">{{ chambre.nom }}</h2>
+      <p>
+         {{ chambre.description }}
+      </p>
+
+      <h3>Équipements</h3>
+      <ul>
+        <li>Sèche cheveux</li>
+        <li>Douche à l’italienne</li>
+        <li>WC privé</li>
+        <li>Wifi</li>
+        <li>Télévision</li>
+        <li>Lit double (2x90x200cm)</li>
+        <li>Mini réfrigérateur</li>
+        <li>Lit bébé (sur demande)</li>
+      </ul>
+
+      <div class="points">
+        {% for photo in photos %}
+          <span></span>
+        {% endfor %}
+    </div>
+    </div>
+  </div>
+
+  <div class="chambre-image">
+     <div class="slides">
+      {% for photo in photos %}
+        <img src={{ photo.url }} alt="Chambre La Forge">
+      {% endfor %}
+  </div>
+    <div class="degrade-gauche"></div>
+  </div>
+
+  <div class="chambre-aside">
+    <div class="tarifs">
+      <h3>Tarifs</h3>
+      <table>
+        <tr>
+          <th class="text-right">Nombre de nuits</th>
+          <th>2</th>
+          <th>4</th>
+        </tr>
+        <tr>
+          <td class="text-right">2 personnes</td>
+          <td>90€</td>
+          <td>85€</td>
+        </tr>      
+      </table>
+      <p class="details">
+        Les prix indiqués sont par nuitée<br>
+        Petit-déjeuner compris<br>
+        <span class="taxe">Taxe de séjour :</span> 0,80€ / jour / adulte
+      </p>
+    </div>
+
+    <div class="disponibilites">
+      <h3>Disponibilités</h3>
+      <div id="datePickerGrange" style="font-size: 15px;"></div>
+    </div>
+  </div>
+</section>
+
+
+<div class="avis-client">
+  <!--<button class="avis-nav prev">❮</button>-->
+
+  <div class="avis-container">
+    {% for avis in avisListe %}
+      <div class="avis {% if loop.first %}active{% endif %}">
+        <blockquote>
+          <p style="color: #231f1c !important;">{{ avis.commentaire }}</p>
+          <footer>{{ avis.nom }}, le {{ avis.date | date('d-m-Y') }}</footer>
+        </blockquote>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- <button class="avis-nav next">❯</button> -->
+</div>
+
+<script>
+// Gestion du carrousel d'avis
+const avisElements = document.querySelectorAll('.avis');
+/*const prevBtn = document.querySelector('.avis-nav.prev');
+const nextBtn = document.querySelector('.avis-nav.next');*/
+let currentAvis = 0;
+
+function showAvis(index) {
+  avisElements.forEach((avis, i) => {
+    avis.classList.toggle('active', i === index);
+  });
+}
+
+/*prevBtn.addEventListener('click', () => {
+  currentAvis = (currentAvis - 1 + avisElements.length) % avisElements.length;
+  showAvis(currentAvis);
+});
+
+nextBtn.addEventListener('click', () => {
+  currentAvis = (currentAvis + 1) % avisElements.length;
+  showAvis(currentAvis);
+});*/
+
+// Optionnel : passage automatique toutes les 10s
+setInterval(() => {
+  currentAvis = (currentAvis + 1) % avisElements.length;
+  showAvis(currentAvis);
+}, 5000);
+
+
+
+
+ const images = document.querySelectorAll('.chambre-image img');
+const points = document.querySelectorAll('.points span');
+let index = 0;
+
+function showSlide(i) {
+  images.forEach((img, idx) => img.classList.toggle('active', idx === i));
+  points.forEach((pt, idx) => pt.classList.toggle('active', idx === i));
+}
+
+showSlide(0);
+
+setInterval(() => {
+  index = (index + 1) % images.length;
+  showSlide(index);
+}, 5000);
+</script>
+
 {% endblock %}
 {% block javascripts %}
     <script>

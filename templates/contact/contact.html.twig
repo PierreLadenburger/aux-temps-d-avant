@@ -2,12 +2,20 @@
 
 {% block title %}Contact{% endblock %}
 
+{% block stylesheets %}
+<style>
+    body {
+        background: #e8dbc7 !important;
+    }
+</style>
+
+{% endblock %}
+
 {% block body %}
     {% include 'commun/menu.html.twig' %}
     <div class="container police">
-        <h2 class="titre">Contact</h2>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 sol-sm-12">
+        <div  style="margin-top: 30px;">
+           
                 <h5 class="font-weight-bold titre-partie">Propriétaires</h5>
                 <ul class="fa-ul">
                     <li><span class="fa-li"><i class="fas fa-user"></i></span> Carine & Christian Cura</li>
@@ -15,37 +23,10 @@
                     <li><span class="fa-li"><i class="fas fa-envelope"></i></span> carinecura@gmail.com</li>
                     <li><span class="fa-li"><i class="fas fa-flag"></i></span> Français & Allemand</li>
                     <li><span class="fa-li"><i class="fas fa-map-marker-alt"></i></span> 24 Grand Rue, 67110 Gundershoffen</li>
-                </ul>
-                <p>Les chiens peuvent être acceptés sur demande.</p>
-            </div>
-            <div class="col-lg-8 col-md-8 sol-sm-12">
-             <!--   <section class="w-100">
-                    <h5 class="font-weight-bold titre-partie">Envoyer un message ...</h5>
-                    {{ form_start(formulaire, {'attr': {'class': 'ml-0'}}) }}
-                    {% for message in app.flashes('success') %}
-                        <div class="alert alert-success">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                    <fieldset class="form-group">
-                        {{ form_row(formulaire.email) }}
-                    </fieldset>
-                    <fieldset class="form-group">
-                        {{ form_row(formulaire.nom) }}
-                    </fieldset>
-                    <fieldset class="form-group">
-                        {{ form_row(formulaire.prenom) }}
-                    </fieldset>
-                    <fieldset class="form-group">
-                        {{ form_row(formulaire.message) }}
-                    </fieldset>
-                    <fieldset class="form-group">
-                        {{ form_row(formulaire.envoyer) }}
-                    </fieldset>
-                    {{ form_end(formulaire) }}
-                </section> -->
-
-            </div>
+                </ul>                
+        
+           
+            <p style="color: #231f1c !important;">Les chiens peuvent être acceptés sur demande.</p>
         </div>
     </div>
 {% endblock %}

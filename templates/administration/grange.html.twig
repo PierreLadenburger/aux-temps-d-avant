@@ -2,6 +2,14 @@
 
 {% block title %}Administration{% endblock %}
 
+{% block stylesheets %}
+<style>
+    body {
+        background: #e8dbc7 !important;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
     {% include 'commun/menu.html.twig' %}
     <div class="container">
@@ -10,7 +18,7 @@
                 {% include 'commun/menu-admin.html.twig' %}
             </div>
             <div class="col-sm-12 col-md-9 col-lg-10 col-xl-10">
-                <h2 class="titre">{{ chambre.nom }}</h2>
+                <h2  style="margin-top: 10px;">{{ chambre.nom }}</h2>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div>

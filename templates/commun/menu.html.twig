@@ -8,19 +8,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
-            <li class="nav-link dropdown" style="cursor: pointer;">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bed"></i> Les chambres<span style="color: #d7c9b8;" class="caret"></span></a>
-                <ul class="dropdown-menu" style="background-color: #353942; border-color: #353942; font-size: 20px;">
-                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'forge' }) }}" style="color: #999c9f;"> La Forge</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'grange' }) }}" style="color: #999c9f;"> La Grange</a></li>
-                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'alcove' }) }}" style="color: #999c9f;"> L'Alcôve</a></li>
+            <li class="nav-link dropdown" style="cursor: pointer; border-left: 2px solid #e8dbc7; padding-left: 30px; padding-right: 30px;">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chambres<span style="color: #d7c9b8;" class="caret"></span></a>
+                <ul class="dropdown-menu" style="background-color: #e8dbc7; border-color: #231f1c; font-size: 20px; color:#231f1c;">
+                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'forge' }) }}" style="color: #231f1c;"> La Forge</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'grange' }) }}" style="color: #231f1c;"> La Grange</a></li>
+                    <li><a class="dropdown-item js-scroll-trigger" href="{{ path('chambre', { diminutif : 'alcove' }) }}" style="color: #231f1c;"> L'Alcôve</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link js-scroll-trigger" href="{{ path('livre-d-or') }}"><i class="fas fa-book"></i> Livre d'or</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="{{ path('restaurant') }}" ><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>
-            <li class="nav-link dropdown" style="cursor: pointer;">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ><i class="fas fa-map-marker-alt"></i> Tourismes<span style="color: #d7c9b8;" class="caret"></span></a>
-                <ul class="dropdown-menu" style="background-color: #353942; border-color: #353942; font-size: 20px;">
+            <li><a class="nav-link js-scroll-trigger" style="cursor: pointer; border-left: 2px solid #e8dbc7; padding-left: 30px; padding-right: 30px;" href="{{ path('noel') }}" >Noël</a></li>
+            <!--<li><a class="nav-link js-scroll-trigger" href="{{ path('livre-d-or') }}"><i class="fas fa-book"></i> Livre d'or</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="{{ path('restaurant') }}" ><i class="fas fa-map-marker-alt"></i> Restaurants</a></li>-->
+            <li class="nav-link dropdown" style="cursor: pointer; border-left: 2px solid #e8dbc7;padding-left: 30px; padding-right: 30px;">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >Adresses<span style="color: #d7c9b8;" class="caret"></span></a>
+                <ul class="dropdown-menu" style="background-color: #e8dbc7; border-color: #231f1c; font-size: 20px; color:#231f1c;">
                     {{ render(controller('App\\Controller\\AccueilController::afficherCategories')) }}
                     <!-- <li><a class="dropdown-item js-scroll-trigger" href="{{ path('tourisme', { categorie : 'balade' }) }}" style="color: #999c9f;"> Balades</a></li>
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Cités</a></li>
@@ -28,16 +29,17 @@
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Mémoires</a></li>
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Terroirs</a></li>
                     <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #999c9f;"> Divers</a></li> -->
+                    <!-- <li><a class="dropdown-item js-scroll-trigger" href="" style="color: #231f1c;"> Liors</a></li> -->
                 </ul>
             </li>
-            <li><a class="nav-link js-scroll-trigger" href="{{ path('ailleur') }}" ><i class="fas fa-heart"></i> Ailleurs</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="{{ path('noel') }}" ><i class="far fa-snowflake"></i> Noël</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="{{ path('contact') }}" ><i class="fas fa-phone"></i> Contact</a></li>
+            <!--<li><a class="nav-link js-scroll-trigger" href="{{ path('ailleur') }}" ><i class="fas fa-heart"></i> Ailleurs</a></li>-->
+          
+            <li><a class="nav-link js-scroll-trigger" style="cursor: pointer; border-left: 2px solid #e8dbc7;padding-left: 30px; padding-right: 30px;" href="{{ path('contact') }}" >Contact</a></li>
             {% if app.user %}
-                <li><a class="nav-link" href="{{ path('administration') }}"><i class="fas fa-user-cog"></i></a> </li>
+                <li><a class="nav-link" style="cursor: pointer; border-left: 2px solid #e8dbc7;padding-left: 30px; padding-right: 30px;" href="{{ path('administration') }}"><i class="fas fa-user-cog"></i></a> </li>
                 <li><a class="nav-link" href="{{ path('deconnexion') }}"><i class="fas fa-sign-out-alt"></i></a> </li>
             {% else %}
-                <li><a class="nav-link" href="{{ path('connexion') }}"><i class="fas fa-lock"></i></a> </li>
+                <li><a class="nav-link" style="cursor: pointer; border-left: 2px solid #e8dbc7;padding-left: 30px; padding-right: 30px;" href="{{ path('connexion') }}"><i class="fas fa-lock"></i></a> </li>
             {% endif %}
         </ul>
     </div>

@@ -1,49 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Authentification{% endblock %}
+{% block stylesheets %}
+<style>
+    body {
+        background: #e8dbc7 !important;
+    }
+</style>
 
+{% endblock %}
 {% block body %}
     {% include 'commun/menu.html.twig' %}
     <div class="container police">
-        <div class="d-flex justify-content-center">
-            <h1 class="titre">Connexion</h1>
-        </div>
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+        <div style="margin-top: 30px;">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('deconnexion') }}">Logout</a>
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.username }}, <a href="{{ path('deconnexion') }}">Logout</a>
+                    </div>
+                {% endif %}
+                <fieldset class="form-group">
+                    <input placeholder="Email" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <input placeholder="Mot de passe" type="password" name="password" id="inputPassword" class="form-control" required>
+                </fieldset>
+
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
                 </div>
-            {% endif %}
-            <fieldset class="form-group">
-                <input placeholder="Email" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-            </fieldset>
+                #}
 
-            <fieldset class="form-group">
-                <input placeholder="Mot de passe" type="password" name="password" id="inputPassword" class="form-control" required>
-            </fieldset>
-
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-            #}
-
-            <button class="btn btn-lg w-100 shadow" type="submit">
-                Se connecter
-            </button>
-        </form>
+                <button class="btn btn-lg w-100 shadow" type="submit">
+                    Se connecter
+                </button>
+            </form>
+        </div>
     </div>
 
 {% endblock %}
