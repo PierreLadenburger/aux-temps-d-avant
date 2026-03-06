@@ -87,18 +87,35 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1400px) {
+  body {
+    overflow: auto;
+  }
+
   .section-fondu {
-    flex-direction: column;
+    overflow: visible;
     height: auto;
+    min-height: 100vh;
   }
+
   .texte {
-    width: 100%;
-    clip-path: none;
+    overflow-y: auto;
+    height: 100vh; /* scroll interne dans la colonne texte */
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    font-size: 14px;
+    box-sizing: border-box;
   }
+
   .images-fondu {
-    width: 100%;
-    height: 60vh;
+    position: sticky; /* l'image reste visible pendant le scroll du texte */
+    top: 0;
+    height: 100vh;
+  }
+
+  .video-fondu {
+    width: 320px;
+    height: 190px;
   }
 }
 
