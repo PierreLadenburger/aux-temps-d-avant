@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body {
+        background: #e8dbc7 !important;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    {% include 'commun/menu.html.twig' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xl-2">
+                {% include 'commun/menu-admin.html.twig' %}
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-10 col-xl-10">
+                <h2 style="margin-top: 10px;">{{ chambre.nom }}</h2>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div>
+                            <div id="datePickerGrenier"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let reservationsObjet = {{ reservations | json_encode() | raw }};
+        let reservations = [];
+        for (let i = 0; i < reservationsObjet.length; i++) {
+            reservations.push(reservationsObjet[i].date.date.substring(0, 10));
+        }
+
+        function formatDateYYYYMMDD(date) {
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth()+1).toString();
+            var dd  = date.getDate().toString();
+            // CONVERT mm AND dd INTO chars
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+            // CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+            return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+        }
+
+        $(document).ready(function () {
+            $(function datepicker () {
+                $("#datePickerGrenier").datepicker({
+                    prevText: 'Préc',
+                    nextText: 'Suiv',
+                    currentText: 'Aujourd\'hui',
+                    dateFormat: "yy-mm-dd",
+                    monthNames: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin',
+                        'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun',
+                        'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                    dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+                    firstDay: 1,
+                    beforeShowDay: function (dateObjet) {
+                        let date = formatDateYYYYMMDD(dateObjet);
+                          for (let i = 0; i < reservations.length; i++) {
+                              if (reservations[i] === date) {
+                                  return [true, 'reserve'];
+                              }
+                          }
+                          return [true, 'disponible'];
+                    },
+                    onSelect: function (date, inst) {
+                        let index = reservations.indexOf(date);
+                        if (index === -1) {
+                            reservations.push(date);
+                        } else {
+                            reservations = reservations.filter(v => v !== date);
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ path('administration_reservation') }}",
+                            dataType: "json",
+                            data: { chambre: 'grenier', date: date},
+                            async: true,
+                            success: function () {
+
+                            }
+                        });
+                        //$('#datePickerForge').datepicker("refresh");
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}
